@@ -1,0 +1,9 @@
+drop database if exists asignaturas;
+create database asignaturas;
+use asignaturas;
+
+create table asignatura(
+id int auto_increment primary key ,
+nombre varchar(50),
+horas int
+);
