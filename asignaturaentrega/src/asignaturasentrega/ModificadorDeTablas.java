@@ -184,5 +184,37 @@ public class ModificadorDeTablas {
 			}
 		});
 
+		
+
+btnGuardar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nombre = txtNombre.getText();
+				String hora = txtHoras.getText();
+				if (nombre == null || nombre.isEmpty() ) {
+					JOptionPane.showMessageDialog(null, "Falta el nombre", "ERROR", JOptionPane.ERROR_MESSAGE);
+				
+				} else if (hora == null || hora.isEmpty() ) {
+					JOptionPane.showMessageDialog(null, "Falta las horas", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+
+					
+				}else if (txtCodigo.getText().isEmpty()) {
+					try {
+						Connection con = ConnectionSingleton.getConnection();
+						PreparedStatement ins_pstmt = con.prepareStatement("insert into asignatura (nombre,horas) values (?,?)");
+						ins_pstmt.setString(1, nombre);
+						ins_pstmt.setInt(2, Integer.valueOf(hora));
+						ins_pstmt.executeUpdate();
+						JOptionPane.showMessageDialog(null, "Asignatura añadida");
+						limpiar();
+						mostrar(model);
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+
+		
 	}
 }
